@@ -4,9 +4,9 @@ import os
 from os.path import join
 import sys
 import csv
-import deblur.image_ops as ops
-import deblur.param_est as param
-import deblur.utils as utils
+import src.image_ops as ops
+import src.param_est as param
+import src.utils as utils
 from skimage.metrics import peak_signal_noise_ratio as psnr
 from skimage.metrics import structural_similarity as ssim
 

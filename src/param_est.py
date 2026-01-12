@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.ndimage import convolve1d
 from scipy.signal import convolve2d
-from deblur.utils import hyper_Laplacian_noise
+from src.utils import hyper_Laplacian_noise
 from scipy.stats import entropy
 import pywt
 
