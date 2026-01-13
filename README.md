@@ -1,9 +1,11 @@
 # Implementation of Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling
 
-## Environment
+This repository provides the **reference implementation** of the image deblurring method proposed in the manuscript:
 
-This implementation is based on **traditional (non-learning) image processing algorithms**,  
-and does **not require GPU or deep learning frameworks**.
+**Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling**,  
+submitted to *The Visual Computer*.
+
+The implementation is based on **traditional (non-learning) image processing algorithms** and does **not require GPUs or deep learning frameworks**.
 
 ### Tested Environment
 - OS: Linux
@@ -82,3 +84,18 @@ python eval.py
 The SSIM and PSNR values will be saved in:
 `output.csv`
 
+
+## Related Publication and Citation
+
+This code is **directly related to the manuscript currently submitted to *The Visual Computer***.
+
+If you use this code or the associated dataset in your research, **please cite the following paper**:
+
+```bibtex
+@article{YourPaper2026Deblurring,
+  title   = {Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling},
+  author  = {xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx},
+  journal = {The Visual Computer},
+  year    = {2026},
+}
+```
