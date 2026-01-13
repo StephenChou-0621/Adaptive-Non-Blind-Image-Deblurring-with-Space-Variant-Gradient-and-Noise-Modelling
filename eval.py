@@ -128,7 +128,8 @@ for s in range(1, 4):
         writer = csv.writer(f)
         writer.writerows([["avg"], temp / 12])
 
-# alphas
+
+# alpha
 data = [["alphas"]]
 with open("output.csv", "a", newline="", encoding="utf-8") as f:
     writer = csv.writer(f)
@@ -169,6 +170,68 @@ for alpha in range(3, 8, 2):
         new_SSIM = ssim(I_opt, I_gt, data_range=1.0)
         old_PSNR = psnr(B, I_gt, data_range=1.0)
         new_PSNR = psnr(I_opt, I_gt, data_range=1.0)
+        temp[0] += old_SSIM
+        temp[1] += new_SSIM
+        temp[2] += old_PSNR
+        temp[3] += new_PSNR
+        # excel for recording experiment data
+        data = [
+            [
+                ind,
+                old_SSIM,
+                new_SSIM,
+                old_PSNR,
+                new_PSNR,
+            ]
+        ]
+        with open("output.csv", "a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerows(data)
+    with open("output.csv", "a", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerows([["avg"], temp / 12])
+
+# alphas ablaition
+data = [["alphas ablation"]]
+with open("output.csv", "a", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerows(data)
+
+for alpha in range(3, 8, 2):
+    temp = np.zeros(4)
+    for ind in range(1, 13):
+        I_gt = (
+            cv2.imread("data/sharp/{}.png".format(ind), cv2.IMREAD_GRAYSCALE).astype(
+                np.float64
+            )
+            / 255
+        )
+        I_opt_bad = (
+            cv2.imread(
+                "all_results/alpha0{}/deblur/no_exp_est_{}.png".format(alpha, ind),
+                cv2.IMREAD_GRAYSCALE,
+            ).astype(np.float64)
+            / 255
+        )
+        I_opt_good = (
+            cv2.imread(
+                "all_results/alpha0{}/deblur/{}.png".format(alpha, ind),
+                cv2.IMREAD_GRAYSCALE,
+            ).astype(np.float64)
+            / 255
+        )
+        assert np.isrealobj(I_opt), "I_opt is complex"
+        assert I_gt.dtype == np.float64
+        assert I_opt_bad.dtype == np.float64
+        assert I_opt_good.dtype == np.float64
+        assert I_gt.min() >= 0.0 and I_gt.max() <= 1.0
+        assert I_opt_bad.min() >= 0.0 and I_opt_bad.max() <= 1.0
+        assert I_opt_good.min() >= 0.0 and I_opt_good.max() <= 1.0
+
+        old_SSIM = ssim(I_opt_bad, I_gt, data_range=1.0)
+        new_SSIM = ssim(I_opt_good, I_gt, data_range=1.0)
+        old_PSNR = psnr(I_opt_bad, I_gt, data_range=1.0)
+        new_PSNR = psnr(I_opt_good, I_gt, data_range=1.0)
         temp[0] += old_SSIM
         temp[1] += new_SSIM
         temp[2] += old_PSNR
