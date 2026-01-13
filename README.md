@@ -25,6 +25,7 @@ conda activate deblur
 pip install -r requirements.txt
 ```
 
+```md
 ## How to run
 1. To test different blur kernels, run:
     ```bash
@@ -40,6 +41,7 @@ pip install -r requirements.txt
     ```bash
     bash RUN.sh
     ```
+```
 
 ## How to test your own data
 ### Data Preparation
