@@ -1,10 +1,10 @@
 import numpy as np
-from math import gamma as Γ
+import math
 
 
 def hyper_Laplacian_noise(shape, alpha, std, seed=None):
     rng = np.random.default_rng(seed)
-    beta = std * np.sqrt(Γ(1 / alpha) / Γ(3 / alpha))
+    beta = std * np.sqrt(math.gamma(1 / alpha) / math.gamma(3 / alpha))
     T = rng.gamma(shape=1 / alpha, scale=1.0, size=shape)
     S = rng.choice([-1.0, 1.0], size=shape)
     return beta * S * (T ** (1.0 / alpha))
@@ -28,6 +28,6 @@ def sigma_gs(sg, sg_n):
 
 
 def lambda_library(alpha, C, N):
-    i = np.arange(N, dtype=float)  # i = 0 ~ N-1
+    i = np.arange(N, dtype=np.float64)  # i = 0 ~ N-1
     lam = C * (2 ** ((alpha / 3) * i))
     return lam

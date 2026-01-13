@@ -32,18 +32,18 @@ def alpha_estimation(B, I_opt, kernel, sigma_n):
         noise_ref = np.round(noise_ref, p)
 
         # histogram
-        # the only valid noise components
+        # the valid noise components
         bins = np.arange(-threshold, threshold + dx, dx)
         # ground true -> P
         hist_sample, _ = np.histogram(noise_sample, bins)
-        hist_sample = hist_sample.astype(float) / hist_sample.sum()
+        hist_sample = hist_sample.astype(np.float64) / hist_sample.sum()
         hist_sample += 1e-12
         # simulate -> Q
         hist_ref, _ = np.histogram(noise_ref, bins)
-        hist_ref = hist_ref.astype(float) / hist_ref.sum()
+        hist_ref = hist_ref.astype(np.float64) / hist_ref.sum()
         hist_ref += 1e-12
 
-        # KL div
+        # KL divergence
         kl = entropy(hist_sample, hist_ref)
         if kl < best_KL[1]:
             best_KL = [alpha_n, kl]
@@ -56,7 +56,7 @@ def DWT_HH(img):
 
 
 def kernel_center_value(kernel):
-    h = np.array(kernel, dtype=float)
+    h = np.array(kernel, dtype=np.float64)
     h /= h.sum()
     cx, cy = np.array(h.shape) // 2
     center_val = h[cx, cy]
@@ -66,7 +66,7 @@ def kernel_center_value(kernel):
 def local_std(Bg, L):
     # assume mean of Bg is zero
     win_size = 2 * L + 1
-    k = np.ones((win_size, win_size), dtype=float) / (win_size**2)
+    k = np.ones((win_size, win_size), dtype=np.float64) / (win_size**2)
     ms_local = convolve2d(Bg**2, k, mode="same", boundary="symm")
     return np.sqrt(ms_local)
 

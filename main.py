@@ -3,12 +3,9 @@ import numpy as np
 import os
 from os.path import join
 import sys
-import csv
 import src.image_ops as ops
 import src.param_est as param
 import src.utils as utils
-from skimage.metrics import peak_signal_noise_ratio as psnr
-from skimage.metrics import structural_similarity as ssim
 
 
 def main():
@@ -18,12 +15,12 @@ def main():
     _, bpath, cpath, rpath1, rpath2, kpath = sys.argv
     B, I_gt = ops.read_img(bpath, cpath)  # [0,1]
     M, N = B.shape
-    kernel = cv2.imread(kpath, cv2.IMREAD_GRAYSCALE).astype(np.float32)
+    kernel = cv2.imread(kpath, cv2.IMREAD_GRAYSCALE).astype(np.float64)
     kernel /= kernel.sum()
 
     # add noise
     # NOTE: you can try other alpha_n_set in [0.1,0.9]
-    alpha_n_set = 0.3
+    alpha_n_set = 0.7
     noise = utils.hyper_Laplacian_noise((M, N), alpha_n_set, std_noise_set, seed=0)
     B = ops.make_noisy_img(B, noise)
 
@@ -35,7 +32,7 @@ def main():
     ind, _ = os.path.splitext(filename)
     cv2.imwrite(join(rpath1, "{}.png".format(int(ind))), B_int)
     temp = join(rpath1, "{}.png".format(int(ind)))
-    B = cv2.imread(temp, cv2.IMREAD_GRAYSCALE).astype(np.float32) / 255
+    B = cv2.imread(temp, cv2.IMREAD_GRAYSCALE).astype(np.float64) / 255
 
     # step 1,2
     # std_n
@@ -103,17 +100,6 @@ def main():
             )
     I_opt = np.clip(I_opt, 0, 1)
 
-    # performance evaluation
-    print("without alpha_n estimation")
-    old_SSIM = ssim(B, I_gt, data_range=1.0)
-    print("old SSIM:", old_SSIM)
-    new_SSIM = ssim(I_opt.astype(np.float64), I_gt.astype(np.float64), data_range=1.0)
-    print("new SSIM:", new_SSIM)
-    old_PSNR = psnr(B, I_gt, data_range=1.0)
-    print("old PSNR:", old_PSNR)
-    new_PSNR = psnr(I_opt.astype(np.float64), I_gt.astype(np.float64), data_range=1.0)
-    print("new PSNR:", new_PSNR)
-
     # save resulted deblur img
     I_opt = I_opt * 255
     I_opt = I_opt.astype(np.uint8)
@@ -122,24 +108,6 @@ def main():
     ind, _ = os.path.splitext(filename)
     cv2.imwrite(join(rpath2, "{}.png".format(int(ind))), I_opt)
     cv2.imwrite(join(rpath2, "no_exp_est_{}.png".format(int(ind))), I_opt)
-
-    # excel for recording experiment data
-    data = [
-        [
-            ind,
-            old_SSIM,
-            new_SSIM,
-            old_PSNR,
-            new_PSNR,
-            "alpha_n=",
-            alpha_n,
-            "alpha_n_set=",
-            alpha_n_set,
-        ]
-    ]
-    with open("results/output.csv", "a", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerows(data)
 
     # deconv again with alpha estimation
     # alpha estimation
@@ -193,31 +161,13 @@ def main():
             )
     I_opt = np.clip(I_opt, 0, 1)
 
-    # performance evaluation
-    print("with alpha_n estimation")
-    old_SSIM = ssim(B, I_gt, data_range=1.0)
-    print("old SSIM:", old_SSIM)
-    new_SSIM = ssim(I_opt.astype(np.float64), I_gt.astype(np.float64), data_range=1.0)
-    print("new SSIM:", new_SSIM)
-    old_PSNR = psnr(B, I_gt, data_range=1.0)
-    print("old PSNR:", old_PSNR)
-    new_PSNR = psnr(I_opt.astype(np.float64), I_gt.astype(np.float64), data_range=1.0)
-    print("new PSNR:", new_PSNR)
-
     # save resulted deblur img
     I_opt = I_opt * 255
     I_opt = I_opt.astype(np.uint8)
-
     os.makedirs(rpath2, exist_ok=True)
     filename = os.path.basename(bpath)
     ind, _ = os.path.splitext(filename)
     cv2.imwrite(join(rpath2, "{}.png".format(int(ind))), I_opt)
-
-    # excel for recording exp.data
-    data = [[ind, old_SSIM, new_SSIM, old_PSNR, new_PSNR, "alpha_n_est=", alpha_n]]
-    with open("results/output.csv", "a", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerows(data)
 
 
 if __name__ == "__main__":

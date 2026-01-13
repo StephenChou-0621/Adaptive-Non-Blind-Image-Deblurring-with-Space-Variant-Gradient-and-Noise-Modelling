@@ -5,9 +5,9 @@ from scipy.signal import convolve2d
 
 
 def read_img(bpath, cpath):
-    B = cv2.imread(bpath, cv2.IMREAD_GRAYSCALE).astype(np.float32) / 255
-    I = cv2.imread(cpath, cv2.IMREAD_GRAYSCALE).astype(np.float32) / 255
-    return B, I
+    blur = cv2.imread(bpath, cv2.IMREAD_GRAYSCALE).astype(np.float64) / 255
+    sharp = cv2.imread(cpath, cv2.IMREAD_GRAYSCALE).astype(np.float64) / 255
+    return blur, sharp
 
 
 def show(img):
@@ -17,17 +17,17 @@ def show(img):
 
 def make_noisy_img(img, noise):
     if img.max() > 1:
-        img = img.astype(float) / 255
+        img = img.astype(np.float64) / 255
     return np.clip(img + noise, 0, 1)
 
 
 def x_grad_map(B):
-    gx = np.array([[1, 0, -1]], dtype=float)
+    gx = np.array([[1, 0, -1]], dtype=np.float64)
     return convolve2d(B, gx, mode="same", boundary="symm")
 
 
 def y_grad_map(B):
-    gy = np.array([[1, 0, -1]], dtype=float).reshape(3, 1)
+    gy = np.array([[1, 0, -1]], dtype=np.float64).reshape(3, 1)
     return convolve2d(B, gy, mode="same", boundary="symm")
 
 
@@ -35,7 +35,7 @@ def deconv(blurimg, alpha, alpha_n, lam, kernel=None):
     def fast_deconvolution(yin, k, alpha, alpha_n, lam):
         def denominator(y, k):
             def psf2otf(k, size_y):
-                K = np.zeros(size_y, dtype=complex)
+                K = np.zeros(size_y, dtype=np.complex128)
                 h, w = k.shape
                 K[:h, :w] = k
                 K = np.roll(K, -(h // 2), axis=0)
@@ -82,7 +82,7 @@ def deconv(blurimg, alpha, alpha_n, lam, kernel=None):
                 t7 = np.sqrt((t1 / 3 + t6).astype(np.complex128))
 
                 # roots
-                root = np.zeros(v.shape + (4,), dtype=complex)
+                root = np.zeros(v.shape + (4,), dtype=np.complex128)
                 root[:, 0] = (3 / 4) * v + (
                     t7 + np.sqrt((-(t1 + t6 + t2 / t7)).astype(np.complex128))
                 ) / 2
@@ -124,7 +124,7 @@ def deconv(blurimg, alpha, alpha_n, lam, kernel=None):
                 t3 = v**2 / t2
 
                 # roots
-                root = np.zeros(v.shape + (3,), dtype=complex)
+                root = np.zeros(v.shape + (3,), dtype=np.complex128)
                 root[:, 0] = t1 + (2 ** (1 / 3)) / 3 * t3 + t2 / (3 * 2 ** (1 / 3))
                 root[:, 1] = (
                     t1
@@ -155,7 +155,7 @@ def deconv(blurimg, alpha, alpha_n, lam, kernel=None):
                 # f'(w)=alpha*|w|^(alpha-1)*sign(w)+beta*(w-v)
                 # f''(w)=alpha*(alpha-1)*|w|^(alpha-2)+beta
                 # w=w0-f'(w)/f''(w)
-                w = v.copy().astype(np.float32)
+                w = v.copy().astype(np.float64)
                 for time in range(4):
                     df = alpha * np.sign(w) * np.abs(w) ** (alpha - 1) + beta * (w - v)
                     ddf = alpha * (alpha - 1) * np.abs(w) ** (alpha - 2) + beta
@@ -191,8 +191,8 @@ def deconv(blurimg, alpha, alpha_n, lam, kernel=None):
             return W
 
         yout = yin.copy()
-        l = k.shape[0]
-        if l % 2 == 0:
+        ll = k.shape[0]
+        if ll % 2 == 0:
             raise ValueError("kernel size must be odd")
 
         # compute F{x}
