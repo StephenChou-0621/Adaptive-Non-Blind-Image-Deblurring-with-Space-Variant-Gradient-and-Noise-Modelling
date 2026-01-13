@@ -20,7 +20,7 @@ def main():
 
     # add noise
     # NOTE: you can try other alpha_n_set in [0.1,0.9]
-    alpha_n_set = 0.7
+    alpha_n_set = 0.3
     noise = utils.hyper_Laplacian_noise((M, N), alpha_n_set, std_noise_set, seed=0)
     B = ops.make_noisy_img(B, noise)
 
@@ -47,10 +47,10 @@ def main():
         param.find_turning_pt(sort_sgy, M, N),
     )
     sigma_n = utils.sigma_noise(sgx_n, sgy_n, utils.Eg(np.array([1, 0, -1])))
-
+    
     # print the estimated noise std
     print("std_n=", sigma_n)
-
+    
     # sigma_gsx,y
     Bgx, Bgy = ops.x_grad_map(B), ops.y_grad_map(B)
     sgx, sgy = param.local_std(Bgx, L), param.local_std(Bgy, L)
