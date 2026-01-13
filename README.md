@@ -42,11 +42,42 @@ bash RUN.sh
 ```
 
 ## How to test your own data
-Put your blur kernels (*.png) into `./data/kernels/` directory, and the blurred images (*.png) into `./data/blur/kernel*/` directory, according to which kernel is applied to the blurred images, and sharp images (*.png) into `./data/sharp/` directory as ground truth images.
-Note that the numbers of images in `./data/blur/kernel*/` and `./data/sharp/` should be identical.
-Note that `./data/blur/kernel*/` should be named as `./data/blur/kernel1/`, `./data/blur/kernel2/`, and so on.
+### Data Preparation
+Put your blur kernels (`*.png`) into:
+`./data/kernels/`
+Put the blurred images (`*.png`) into:
+`./data/blur/kernel*/`
+according to which kernel is applied.
+Put the sharp (ground truth) images (`*.png`) into:
+`./data/sharp/`
+### Notes
+The number of images in `./data/blur/kernel*/` and `./data/sharp/` must be identical.
+The directories under `./data/blur/` should be named as:
+`kernel1/`, `kernel2/`, `kernel3/`,...
 
 ## Results
-Our experiment results (i.e. deblurring performance under different noise exponents, kernels, and noise stds) are saved in `./all_results/` directory. There are three for different noise exponents, named as `alpha03`, `alpha05`, `alpha07`; eight for different kernels, named as `k1` to `k8`; and three for different stds, named as `std001`, `std002`, and `std003`.
-You can evaluate the qualities of the restored images in `./all_results/` by typing `python eval.py`, and the ssim and psnr values will be saved in `output.csv`.
+
+All experimental results (i.e. deblurring performance under different noise exponents, kernels, and noise standard deviations) are saved in:
+`./all_results/`
+
+### Directory Organization
+
+- Noise exponents:
+`alpha03/`, `alpha05/`, `alpha07/`
+
+- Blur kernels:
+`k1/`,`k2/`,...,`k8/`
+
+- Noise standard deviations:
+ `std001/`, `std002/`, `std003/`
+ 
+### Evaluation
+
+You can evaluate the restored images by running:
+
+```bash
+python eval.py
+```
+The SSIM and PSNR values will be saved in:
+`output.csv`
 
