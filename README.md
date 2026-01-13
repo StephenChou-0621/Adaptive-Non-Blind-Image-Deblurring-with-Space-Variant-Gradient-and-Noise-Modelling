@@ -44,7 +44,7 @@ bash RUN.sh
 ## How to test your own data
 put your blur kernels (*.png) into `./data/kernels/` directory, and the blurred images (*.png) into `./data/blur/kernel*/` directory according to which kernel is applied to the blurred image, and sharp images (*.png) into `./data/sharp/` directory as ground truth image.
 Note that the numbers of images in `./data/blur/kernel*/` and `./data/sharp/` should be identical.
-Note that "./data/blur/kernel*/" should be named as "./data/blur/kernel1/", "./data/blur/kernel2/", and so on.
+Note that `./data/blur/kernel*/` should be named as `./data/blur/kernel1/`, `./data/blur/kernel2/`, and so on.
 
 ## Results
 Our experiment results (i.e. deblurring performance under different noise exponents, kernels, and noise stds) are saved in `./all_results/` directory. There are three for different noise exponents, named as `alpha03`, `alpha05`, `alpha07`; eight for different kernels, named as `k1` to `k8`; and three for different stds, named as `std001`, `std002`, and `std003`.
