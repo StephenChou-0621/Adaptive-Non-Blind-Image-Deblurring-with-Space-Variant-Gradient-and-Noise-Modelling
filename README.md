@@ -1,4 +1,4 @@
-## Implementation of "Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling"
+# Implementation of Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling
 
 ## Environment
 
@@ -54,7 +54,7 @@ according to which kernel is applied.
 ### Notes
 - The number of images in `./data/blur/kernel*/` and `./data/sharp/` must be identical.
 - The directories under `./data/blur/` should be named as:
-`kernel1/`, `kernel2/`, `kernel3/`,...
+`kernel1/`, `kernel2/`, `kernel3/`, ...
 
 ## Results
 
