@@ -9,8 +9,8 @@ import src.utils as utils
 
 
 def main():
-    # NOTE: you can try other noise level by setting std_noise_set = [0.01,0.05]
-    # to set clean image, set std_noise_set = 0
+    # NOTE: To try other noise std by setting std_noise_set = [0.01,0.05]
+    # To set clean image, set std_noise_set = 0
     alpha, std_noise_set = 0.8, 0.01
     _, bpath, cpath, rpath1, rpath2, kpath = sys.argv
     B, I_gt = ops.read_img(bpath, cpath)  # [0,1]
@@ -19,7 +19,7 @@ def main():
     kernel /= kernel.sum()
 
     # add noise
-    # NOTE: you can try other alpha_n_set in [0.1,0.9]
+    # NOTE: To try other noise exponents, set alpha_n_set in [0.1,0.9]
     alpha_n_set = 0.3
     noise = utils.hyper_Laplacian_noise((M, N), alpha_n_set, std_noise_set, seed=0)
     B = ops.make_noisy_img(B, noise)
@@ -50,7 +50,12 @@ def main():
     
     # print the estimated noise std
     print("std_n=", sigma_n)
-    
+
+    # NOTE: To check the error of estimated noise std, set check_noise_std=True
+    check_noise_std=False
+    if check_noise_std:
+        print("err=",sigma_n-std_noise_set)
+
     # sigma_gsx,y
     Bgx, Bgy = ops.x_grad_map(B), ops.y_grad_map(B)
     sgx, sgy = param.local_std(Bgx, L), param.local_std(Bgy, L)
