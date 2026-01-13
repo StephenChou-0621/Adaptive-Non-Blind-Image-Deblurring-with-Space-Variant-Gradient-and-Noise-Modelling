@@ -42,7 +42,7 @@ bash RUN.sh
 ```
 
 ## How to test your own data
-put your blur kernels (*.png) into `./data/kernels/` directory, and the blurred images (*.png) into `./data/blur/kernel*/` directory according to which kernel is applied to the blurred image, and sharp images (*.png) into `./data/sharp/` directory as ground truth image.
+Put your blur kernels (*.png) into `./data/kernels/` directory, and the blurred images (*.png) into `./data/blur/kernel*/` directory, according to which kernel is applied to the blurred images, and sharp images (*.png) into `./data/sharp/` directory as ground truth images.
 Note that the numbers of images in `./data/blur/kernel*/` and `./data/sharp/` should be identical.
 Note that `./data/blur/kernel*/` should be named as `./data/blur/kernel1/`, `./data/blur/kernel2/`, and so on.
 
