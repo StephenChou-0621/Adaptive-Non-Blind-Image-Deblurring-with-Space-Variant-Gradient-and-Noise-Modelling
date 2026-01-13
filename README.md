@@ -23,7 +23,7 @@ The following Python packages are required:
 conda create -n deblur python=3.10.19 -y
 conda activate deblur
 pip install -r requirements.txt
-
+```
 
 # How to run
 1. To test different blur kernels, type "bash RUN.sh".
