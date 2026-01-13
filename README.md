@@ -27,19 +27,19 @@ pip install -r requirements.txt
 
 ## How to run
 1. To test different blur kernels, run:
-```bash
-bash RUN.sh
-```
+    ```bash
+    bash RUN.sh
+    ```
 
-2. To test different noise standard deviations, set the parameter `std_noise_set` in `main.py`, and then run:
-```bash
-bash RUN.sh
-```
+2. To test different noise standard deviations, set the parameter `std_noise_set` in `main.py` (0.01,0.02,...), and then run:
+    ```bash
+    bash RUN.sh
+    ```
 
-3. To test different noise exponents, set the parameter `alpha_n_set` in `main.py`, and then run
-```bash
-bash RUN.sh
-```
+3. To test different noise exponents, set the parameter `alpha_n_set` in `main.py` (0.1 to 0.9), and then run
+    ```bash
+    bash RUN.sh
+    ```
 
 ## How to test your own data
 ### Data Preparation
