@@ -49,7 +49,6 @@ All datasets and blur kernels used in the experiments are **publicly available b
   The motion blur kernels are taken from the benchmark introduced by Levin et al. in their seminal work on image deblurring. These kernels have been widely used as standard test cases in motion deblurring experiments.
 
 
-```markdown
 ## How to run
 
 ### 1. Test with Different Blur Kernels
@@ -69,7 +68,7 @@ All datasets and blur kernels used in the experiments are **publicly available b
     ```bash
     bash RUN.sh
     ```
-```
+
 
 ## How to test your own data
 ### Data Preparation
