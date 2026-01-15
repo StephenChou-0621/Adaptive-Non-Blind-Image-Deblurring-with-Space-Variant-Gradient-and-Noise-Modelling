@@ -13,11 +13,12 @@ The proposed approach is based on **traditional (non-learning) image processing 
 
 This repository is publicly available on GitHub and provides full access to the source code required to reproduce all experiments reported in the manuscript.
 
-An archived release of this repository will be created on Zenodo and assigned a permanent DOI upon acceptance of the manuscript, ensuring long-term accessibility and reproducibility.
+The source code has been archived on Zenodo and assigned a permanent DOI to ensure long-term accessibility and reproducibility:
 
-Code DOI (Zenodo): to be assigned upon acceptance of the manuscript.
+**Zenodo DOI:** https://doi.org/10.5281/zenodo.18257208
 
-The archived version will correspond to the implementation used for the experiments reported in the final accepted manuscript.
+The archived release corresponds to the implementation used for the experiments reported in the manuscript.
+
 
 ---
 
