@@ -53,21 +53,21 @@ All datasets and blur kernels used in the experiments are **publicly available b
 
 ### 1. Test with Different Blur Kernels
     To evaluate the proposed method under different blur kernels, run:
-    ```bash
-    bash RUN.sh
-    ```
+```bash
+bash RUN.sh
+```
 
 ### 2. Test with Different Noise Standard Deviations
     Set the parameter `std_noise_set` in `main.py` (e.g., 0.01, 0.02, ...) and run:
-    ```bash
-    bash RUN.sh
-    ```
+```bash
+bash RUN.sh
+```
 
 ### 3. Test with Different Noise Exponents
     Set the parameter `alpha_n_set` in `main.py` (e.g., 0.1 to 0.9) and run:
-    ```bash
-    bash RUN.sh
-    ```
+```bash
+bash RUN.sh
+```
 
 
 ## How to test your own data
