@@ -15,6 +15,8 @@ This repository is publicly available on GitHub and provides full access to the 
 
 An archived release of this repository will be created on Zenodo and assigned a permanent DOI upon acceptance of the manuscript, ensuring long-term accessibility and reproducibility.
 
+Code DOI (Zenodo): to be assigned upon acceptance of the manuscript.
+
 The archived version will correspond to the implementation used for the experiments reported in the final accepted manuscript.
 
 ---
