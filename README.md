@@ -165,11 +165,11 @@ submitted to The *Visual Computer*.
 If you use this code or the associated dataset in your research, **please cite the following paper**:
 
 ```bibtex
-@article{YourPaper2026Deblurring,
-  title   = {Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling},
+@unpublished{Chou2026AdaptiveDeblurring,
+  title  = {Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling},
   author = {Chou, Shih-Hsuan and Chang, Je-Yuan and Liao, Chun-Lin and Tsai, Zse-Hong and Ding, Jian-Jiun},
-  journal = {The Visual Computer},
-  year    = {2026},
+  note   = {Manuscript submitted to The Visual Computer},
+  year   = {2026}
 }
 ```
 
