@@ -3,7 +3,7 @@
 This repository provides the **reference implementation** of the image deblurring method proposed in the manuscript:
 
 **Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling**,  
-submitted to *The Visual Computer*.
+submitted to *Signal Processing (Elsevier), 2026*.
 
 The proposed approach is based on **traditional (non-learning) image processing methods** and focuses on **non-blind motion deblurring** with space-variant gradient and noise distribution modelling. The implementation does **not require GPUs or deep learning frameworks**.
 
@@ -169,7 +169,7 @@ If you use this code or the associated dataset in your research, **please cite t
 @unpublished{Chou2026AdaptiveDeblurring,
   title  = {Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling},
   author = {Chou, Shih-Hsuan and Chang, Je-Yuan and Liao, Chun-Lin and Tsai, Zse-Hong and Ding, Jian-Jiun},
-  note   = {Manuscript submitted to The Visual Computer},
+  note   = {Manuscript submitted to Signal Processing (Elsevier)},
   year   = {2026}
 }
 ```
