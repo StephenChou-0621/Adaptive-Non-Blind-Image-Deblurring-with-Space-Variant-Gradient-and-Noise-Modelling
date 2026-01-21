@@ -161,7 +161,7 @@ The evaluation results will be saved to:
 
 This code is directly related to the following manuscript:  
 **Adaptive Non-Blind Image Deblurring with Space-Variant Gradient and Noise Modelling**,  
-submitted to The *Visual Computer*.
+submitted to The *Signal Processing (Elsevier), 2026*.
 
 If you use this code or the associated dataset in your research, **please cite the following paper**:
 
